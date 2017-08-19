@@ -1,0 +1,22 @@
+{
+    "name": "ujpef/latte-view",
+    "description": "Latte slim wrapper",
+    "license": "MIT",
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Jiri Lysek",
+            "email": "jiri.lysek@mendelu.cz",
+            "homepage": "https://akela.mendelu.cz/~lysek/"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^1.0",
+        "latte/latte": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ujpef\\": "src"
+        }
+    }
+}
