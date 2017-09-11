@@ -4,14 +4,14 @@
 
 You can use this small library to integrate Latte templates into a project based on Slim framework.
 
-This project was created for course APV on Mendel University in Brno.
+This project was created for [course APV](http://odinuv.cz/en/apv/course/) on Mendel University in Brno.
 
 ## Methods
 
 ### __construct(Latte\Engine $latte, $pathToTemplates)
 
 Create an instance of Latte wrapper. Pass instance of Latte engine and path to your templates. You can optionally
-configure Latte engine before you pass it to the wrapper.
+configure Latte engine before you pass it to the wrapper (eg. set up cache folder for templates).
 
 ### addParam($name, $param)
 
