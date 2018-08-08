@@ -15,13 +15,11 @@ class LatteView
 {
 
     private $latte;
-    private $pathToTemplates;
     private $additionalParams = [];
 
-    public function __construct(Engine $latte, $pathToTemplates)
+    public function __construct(Engine $latte)
     {
         $this->latte = $latte;
-        $this->pathToTemplates = $pathToTemplates;
     }
 
     /**
@@ -55,7 +53,6 @@ class LatteView
      */
     public function render(Response $response, $name, array $params = [])
     {
-        $name = $this->pathToTemplates . '/' . $name;
         $params = array_merge($this->additionalParams, $params);
         $output = $this->latte->renderToString($name, $params);
         $response->getBody()->write($output);
