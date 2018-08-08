@@ -4,7 +4,7 @@
 
 You can use this small library to integrate Latte templates into a project based on Slim framework.
 
-This project was created for [course APV](http://odinuv.cz/course/) on Mendel University in Brno.
+This project was created for [course APV](https://akela.mendelu.cz/~lysek/tmwa/) on Mendel University in Brno.
 
 ## Installation
 
@@ -18,8 +18,16 @@ composer require ujpef/latte-view
 
 ### __construct(Latte\Engine $latte, $pathToTemplates)
 
-Create an instance of Latte wrapper. Pass instance of Latte engine and path to your templates. You can optionally
-configure Latte engine before you pass it to the wrapper (eg. set up cache folder for templates).
+Create an instance of Latte wrapper. Pass instance of configured Latte engine. You should configure Latte engine
+before you pass it to the wrapper: set up templates path and set up cache folder for templates.
+
+```php
+$engine = new \Latte\Engine\Engine();
+$engine->setLoader(new \Latte\Loaders\FileLoader(__DIR__ . '/../templates/'));
+$engine->setTempDirectory(__DIR__ . '/../cache');
+
+$latteView = new \Ujpef\LatteView\LatteView($engine);
+```
 
 ### addParam($name, $param)
 
@@ -50,13 +58,15 @@ Define a dependency for Slim framework (change templates source folder and cache
 
 ```php
 use Latte\Engine;
+use Latte\Loaders\FileLoader;
 use Ujpef\LatteView;
 
 $container['view'] = function ($container) use ($settings) {
     $engine = new Engine();
+    $engine->setLoader(new FileLoader(__DIR__ . '/../templates/'));
     $engine->setTempDirectory(__DIR__ . '/../cache');
 
-    $latteView = new LatteView($engine, __DIR__ . '/../templates/');
+    $latteView = new LatteView($engine);
     return $latteView;
 };
 ```
@@ -94,9 +104,13 @@ To use Slim's build in [router](https://www.slimframework.com/docs/objects/route
 ```php
 use Latte\MacroNode;
 use Latte\PhpWriter;
+use Latte\Loaders\FileLoader;
 
 $container['view'] = function ($container) use ($settings) {
-	//...
+    $engine = new Engine();
+    $engine->setLoader(new FileLoader(__DIR__ . '/../templates/'));
+    $engine->setTempDirectory(__DIR__ . '/../cache');
+
     $latteView->addParam('router', $container->router);
     $latteView->addMacro('link', function (MacroNode $node, PhpWriter $writer) use ($container) {
         if (strpos($node->args, ' ') !== false) {
