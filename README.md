@@ -75,8 +75,8 @@ To return result of Latte template rendering call the `render()` method.
 
 ```php
 $app->get('/[{name}]', function (Request $request, Response $response, $args) {
-	$tplVars = [
-    	'variable' => 123
+    $tplVars = [
+        'variable' => 123
     ];
     return $this->view->render($response, 'index.latte', $tplVars);
 })->setName('index');
@@ -87,11 +87,11 @@ In template use:
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-    	<title>test template</title>
+    <head>
+        <title>test template</title>
     </head>
     <body>
-		contents of variable: {$variable}
+        contents of variable: {$variable}
     </body>
 </html>
 ```
@@ -127,7 +127,7 @@ Remember to set names for your routes:
 
 ```php
 $app->get('/test', function (Request $request, Response $response, $args) {
-	//route implementation
+    //route implementation
 })->setName('routeName');
 ```
 
@@ -135,7 +135,7 @@ This also works with route placeholders:
 
 ```php
 $app->get('/test/{something}', function (Request $request, Response $response, $args) {
-	//route implementation
+    //route implementation
 })->setName('routeName');
 ```
 
