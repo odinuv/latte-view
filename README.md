@@ -113,8 +113,9 @@ $container['view'] = function ($container) use ($settings) {
     $engine->setLoader(new FileLoader(__DIR__ . '/../templates/'));
     $engine->setTempDirectory(__DIR__ . '/../cache');
 
+    $latteView = new LatteView($engine);
     $latteView->addParam('router', $container->router);
-    $latteView->addMacro('link', function (MacroNode $node, PhpWriter $writer) use ($container) {
+    $latteView->addMacro('link', function (MacroNode $node, PhpWriter $writer) {
         if (strpos($node->args, ' ') !== false) {
             return $writer->write("echo \$router->pathFor(%node.word, %node.args);");
         } else {
