@@ -102,9 +102,11 @@ To use Slim's build in [router](https://www.slimframework.com/docs/objects/route
 `{link routeName}` add following lines into dependency definition:
 
 ```php
+use Latte\Engine;
 use Latte\MacroNode;
 use Latte\PhpWriter;
 use Latte\Loaders\FileLoader;
+use Ujpef\LatteView;
 
 $container['view'] = function ($container) use ($settings) {
     $engine = new Engine();
